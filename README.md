@@ -1,12 +1,12 @@
 # 🚨 Multimodal Disaster Alert System with Automated Emergency Notification
 
-A deep learning based disaster alert system that uses both image input and text input to detect possible disaster situations and automatically send an email alert to authorities when high-confidence disaster evidence is found.
+A deep learning based disaster alert system that uses both **image input** and **text input** to detect possible disaster situations and automatically send an email alert when high-confidence disaster evidence is found.
 
 ---
 
 ## 📌 Project Overview
 
-This project combines Computer Vision and Natural Language Processing to build a multimodal disaster detection system.
+This project combines **Computer Vision** and **Natural Language Processing** to build a multimodal disaster detection system.
 
 The system takes:
 
@@ -20,7 +20,7 @@ Then it predicts:
 - Final fused disaster result
 - Whether an automatic alert should be sent
 
-If the final result shows a high-confidence disaster, the system sends an automated email notification to the configured authority email.
+If the final result shows a high-confidence disaster, the system sends an automated email notification to the configured receiver email.
 
 ---
 
@@ -39,7 +39,7 @@ Disaster Type + Confidence
         ↓
 Streamlit Dashboard
         ↓
-Email Alert to Authorities
+Email Alert
 ```
 
 ---
@@ -48,7 +48,7 @@ Email Alert to Authorities
 
 ### 1. Image Model
 
-The image model is based on ResNet50 and classifies disaster images into six categories:
+The image model is based on **ResNet50** and classifies disaster images into six categories:
 
 ```text
 Damaged_Infrastructure
@@ -59,7 +59,7 @@ Non_Damage
 Water_Disaster
 ```
 
-The trained image model is saved as:
+The trained image model file is:
 
 ```text
 models/best_resnet50_model.keras
@@ -75,7 +75,7 @@ models/class_names.json
 
 ### 2. Text Model
 
-The text model is based on DistilBERT and is trained on the Kaggle Disaster Tweets dataset.
+The text model is based on **DistilBERT** and is trained on the Kaggle Disaster Tweets dataset.
 
 It performs binary classification:
 
@@ -152,19 +152,40 @@ disaster-alert-system/
 ├── .streamlit/
 │   └── secrets.toml
 ├── models/
-│   ├── best_resnet50_model.keras
 │   ├── class_names.json
 │   └── text_model_distilbert/
 │       ├── config.json
-│       ├── model.safetensors
 │       ├── tokenizer.json
-│       ├── tokenizer_config.json
-│       └── vocab.txt
-├── notebooks/
-│   ├── image_model.ipynb
-│   ├── text_model_distilbert.ipynb
-│   └── fusion_model.ipynb
+│       └── tokenizer_config.json
 └── sample_inputs/
+```
+
+---
+
+## ⚠️ Important: Large Model Files
+
+Large trained model files are **not uploaded to GitHub** because GitHub has a 100 MB file size limit.
+
+The following files are required to run the app locally:
+
+```text
+models/best_resnet50_model.keras
+models/text_model_distilbert/model.safetensors
+```
+
+Place these files manually in the correct folders before running the application.
+
+Correct final model structure should be:
+
+```text
+models/
+├── best_resnet50_model.keras
+├── class_names.json
+└── text_model_distilbert/
+    ├── config.json
+    ├── model.safetensors
+    ├── tokenizer.json
+    └── tokenizer_config.json
 ```
 
 ---
@@ -174,7 +195,7 @@ disaster-alert-system/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/disaster-alert-system.git
+git clone https://github.com/bansalhim/disaster-alert-system.git
 cd disaster-alert-system
 ```
 
@@ -230,25 +251,15 @@ numpy
 
 ## 🔐 Email Configuration
 
-Create a folder:
+This repository contains a demo `.streamlit/secrets.toml` file with placeholder values.
 
-```text
-.streamlit/
-```
-
-Inside it, create:
-
-```text
-secrets.toml
-```
-
-Add this:
+Before running email alerts, replace the demo values with your own Gmail details:
 
 ```toml
 [email]
-sender_email = "your_email@gmail.com"
+receiver_email = "your_receiver_email@gmail.com"
+sender_email = "your_sender_email@gmail.com"
 sender_password = "your_16_character_google_app_password"
-receiver_email = "authority_email@gmail.com"
 ```
 
 Important:
@@ -256,7 +267,7 @@ Important:
 - Turn on Google 2-Step Verification.
 - Generate a Gmail App Password.
 - Use the App Password, not your normal Gmail password.
-- Do not upload `secrets.toml` to GitHub.
+- The current GitHub file contains only demo placeholders.
 
 ---
 
@@ -439,15 +450,21 @@ This reduces false alerts caused by image-only or text-only uncertainty.
 
 ## 🔒 Security Note
 
-Do not push sensitive files to GitHub.
+Do not upload real passwords or real Gmail App Passwords to GitHub.
 
-Add this to `.gitignore`:
+For production usage, keep real credentials private and use environment variables or Streamlit secrets.
+
+Recommended `.gitignore`:
 
 ```gitignore
-.streamlit/secrets.toml
 .venv/
 __pycache__/
 *.pyc
+.DS_Store
+.ipynb_checkpoints/
+*.zip
+models/best_resnet50_model.keras
+models/text_model_distilbert/model.safetensors
 ```
 
 ---
@@ -490,6 +507,7 @@ Text Model Training        ✅ Completed
 Fusion Logic               ✅ Completed
 Streamlit Dashboard        ✅ Completed
 Automated Email Alert      ✅ Completed
+GitHub Upload              ✅ Completed
 ```
 
 ---
