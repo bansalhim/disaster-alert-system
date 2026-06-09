@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+*.zip
+
+models/best_resnet50_model.keras
+models/text_model_distilbert/model.safetensors

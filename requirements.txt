@@ -1,0 +1,9 @@
+streamlit==1.41.1
+tensorflow==2.20.0
+torch
+transformers==4.44.2
+tokenizers==0.19.1
+huggingface-hub==0.24.6
+safetensors
+pillow
+numpy
